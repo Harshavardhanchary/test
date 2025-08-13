@@ -83,12 +83,15 @@ sudo apt-get install jenkins -y
 
 3.  **User-Access:**
 
-(Grant permission for ubuntu to access docker)
-`sudo usermod -aG docker ubuntu` 
- (Grant permission for jenkins to access docker)
+Grant permission for ubuntu (your-user) to access docker
+```
+sudo usermod -aG docker ubuntu
+```
+ Grant permission for Jenkins to access docker
 ```
 sudo usermod -aG docker jenkins
 ```
+Restart Jenkins after downloading plugins and added the credentials
 ```
 sudo systemctl restart jenkins
 ```
