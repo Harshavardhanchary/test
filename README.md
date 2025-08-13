@@ -242,9 +242,9 @@ sudo kubectl get pods
 - In your domain hosting platform(Ex: Hostinger, Cloudflare, etc ) add a DNS record 
 
 - Type: `A`
-Name:`Library`
-Value(or) IPv4 Address:`ec2-public-ip`
-Proxy status: `DNS only`
+- Name:`Library`
+- Value(or) IPv4 Address:`ec2-public-ip`
+- Proxy status: `DNS only`
 
 - You can access the web-app at `https//yourdomain.com/Homepage.jsp`
 ## NOTE
