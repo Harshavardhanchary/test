@@ -233,7 +233,7 @@ sudo kubectl  create  secret  generic  library-secrets  --from-literal=DB_USERNA
 - You should see your pods running in couple of minutes.
 - In instance use :
 ```
-kubectl get pods
+sudo kubectl get pods
 ```
 - you should see two pods running:
 `library` and `db`
