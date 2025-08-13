@@ -202,7 +202,7 @@ sudo kubectl patch svc argocd-server -n argocd -p  '{"spec": {"type": "NodePort"
 ```
 - Get the Node Port using :
 ```
-kubectl get svc argocd-server -n argocd
+sudo kubectl get svc argocd-server -n argocd
 ```
 `80/32xxx` and `443/32xxx` you can access on either of the port numbers. [Make sure to allow the port numbers in security group Inbound Rules]
 - Example port number:  `32454`
@@ -213,13 +213,13 @@ kubectl get svc argocd-server -n argocd
 - Initial username is `admin`
 - You can get the password using:
 ```
-kubectl get secret argocd-initial-admin-secret -n  argocd -o jsonpath="{.data.password}" | base64 -d
+sudo kubectl get secret argocd-initial-admin-secret -n  argocd -o jsonpath="{.data.password}" | base64 -d
 ```
 
 **Secrets**
 - Create secrets before setting up applications
 ```
-kubectl  create  secret  generic  library-secrets  --from-literal=DB_USERNAME=dbuser  --from-literal=DB_PASSWORD=Userpassword  --from-literal=DB_URL=jdbc:mysql://db:3306/Library_Manager  --from-literal=MYSQL_ROOT_PASSWORD=Root@123  --from-literal=MYSQL_DATABASE=Library_Manager  --from-literal=MYSQL_USER=dbuser  --from-literal=MYSQL_PASSWORD=Userpassword
+sudo kubectl  create  secret  generic  library-secrets  --from-literal=DB_USERNAME=dbuser  --from-literal=DB_PASSWORD=Userpassword  --from-literal=DB_URL=jdbc:mysql://db:3306/Library_Manager  --from-literal=MYSQL_ROOT_PASSWORD=Root@123  --from-literal=MYSQL_DATABASE=Library_Manager  --from-literal=MYSQL_USER=dbuser  --from-literal=MYSQL_PASSWORD=Userpassword
 ```
 
 - Create 2 applications one for Backend and other for Database.
