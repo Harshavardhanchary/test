@@ -240,7 +240,8 @@ sudo kubectl get pods
 
 ## DNS
 - In your domain hosting platform(Ex: Hostinger, Cloudflare, etc ) add a DNS record 
-Type: `A`
+
+- Type: `A`
 Name:`Library`
 Value:`ec2-public-ip`
 Proxy status: `DNS only`
