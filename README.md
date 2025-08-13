@@ -262,19 +262,20 @@ sudo kubectl get svc
 ## Folder Structure
 
 - `Library_manager` 
-├── backend/ # Spring Boot backend application  
-│ ├── src/ # Java source code and resources  
-│ ├── pom.xml # Maven build configuration  
-│ └── Dockerfile # Backend Docker image build file  
-│  
-├── database/ # MySQL database container setup  
-│ ├── library_manager.sql # Initial DB setup script  
-│ └── Dockerfile # MySQL Docker image build file  
-│  
-├── docker-compose.yml # Multi-container orchestration  
-├── Jenkinsfile # Jenkins CI/CD pipeline definition  
-├── .env.example # Environment variables  
-└── README.md # Project documentation
+- 
+  ├── backend/ # Spring Boot backend application  
+ │ ├── src/ # Java source code and resources  
+ │ ├── pom.xml # Maven build configuration  
+ │ └── Dockerfile # Backend Docker image build file  
+ │  
+ ├── database/ # MySQL database container setup  
+ │ ├── library_manager.sql # Initial DB setup script  
+ │ └── Dockerfile # MySQL Docker image build file  
+ │  
+ ├── docker-compose.yml # Multi-container orchestration  
+ ├── Jenkinsfile # Jenkins CI/CD pipeline definition  
+ ├── .env.example # Environment variables  
+ └── README.md # Project documentation
 ---
 
 For any issues, please open an issue on the [GitHub repository](https://github.com/Harshavardhanchary/Library-Manager).
