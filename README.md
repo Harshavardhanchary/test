@@ -243,7 +243,7 @@ sudo kubectl get pods
 
 - Type: `A`
 Name:`Library`
-Value:`ec2-public-ip`
+Value(or) IPv4 Address:`ec2-public-ip`
 Proxy status: `DNS only`
 
 - You can access the web-app at `https//yourdomain.com/Homepage.jsp`
@@ -265,18 +265,18 @@ sudo kubectl get svc
 - `Library_manager` 
 - 
   ├── backend/ # Spring Boot backend application  
- │ ├── src/ # Java source code and resources  
- │ ├── pom.xml # Maven build configuration  
- │ └── Dockerfile # Backend Docker image build file  
- │  
- ├── database/ # MySQL database container setup  
- │ ├── library_manager.sql # Initial DB setup script  
- │ └── Dockerfile # MySQL Docker image build file  
- │  
- ├── docker-compose.yml # Multi-container orchestration  
- ├── Jenkinsfile # Jenkins CI/CD pipeline definition  
- ├── .env.example # Environment variables  
- └── README.md # Project documentation
+  │ ├── src/ # Java source code and resources  
+  │ ├── pom.xml # Maven build configuration  
+  │ └── Dockerfile # Backend Docker image build file  
+  │  
+  ├── database/ # MySQL database container setup  
+  │ ├── library_manager.sql # Initial DB setup script  
+  │ └── Dockerfile # MySQL Docker image build file  
+  │  
+  ├── docker-compose.yml # Multi-container orchestration  
+  ├── Jenkinsfile # Jenkins CI/CD pipeline definition  
+  ├── .env.example # Environment variables  
+  └── README.md # Project documentation
 ---
 
 For any issues, please open an issue on the [GitHub repository](https://github.com/Harshavardhanchary/Library-Manager).
