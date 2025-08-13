@@ -1,4 +1,3 @@
-# test
   
 
 # Library-Manager
@@ -84,17 +83,20 @@ sudo apt-get install jenkins -y
 
 3.  **User-Access:**
 
-
-`sudo usermod -aG docker ubuntu` (Grant permission for ubuntu to access docker)
-
-`sudo usermod -aG docker jenkins` (Grant permission for jenkins to access docker)
-
-`sudo systemctl restart jenkins`
-
+(Grant permission for ubuntu to access docker)
+`sudo usermod -aG docker ubuntu` 
+ (Grant permission for jenkins to access docker)
+```
+sudo usermod -aG docker jenkins
+```
+```
+sudo systemctl restart jenkins
+```
 
 4.**Restart the instance:**
+Logout from the instance and re-login
 ```
-logut from the instance and re-login
+exit
 ```
 (or) 
 ```
@@ -110,34 +112,34 @@ curl -sfL https://get.k3s.io | sh  -
 
 `kubectl get nodes ` (##make sure control and  master-plane are ready)
 
-## Steps
-
+## Steps to Run the Application
   
 
 1.  **Clone the repository:**
 
 ```bash
 git clone https://github.com/Harshavardhanchary/Library-Manager.git
-
+```
+```
 cd Library-Manager
 ```
 
 2. **Set environment variables:**
 
 Create a `.env` file in the root directory:
-
-`mv .env.example .env`
-
+```
+mv .env.example .env`
+```
   
 
 3.  **Build and start the services:**
 
-```sh
+```
 docker-compose build
-
+```
+```
 docker-compose up -d
 ```
-
   
 
 4. **Access the application:**
@@ -147,7 +149,9 @@ docker-compose up -d
 
 5.  **Stop the services:**
 
-`docker-compose down`
+```
+docker-compose down
+```
 
 After Executing the application locally using docker-compose ,we'll move to Jenkins-part
   
@@ -156,7 +160,9 @@ After Executing the application locally using docker-compose ,we'll move to Jenk
 ### Jenkins
 - After installing Jenkins you can access it at http://ec2-public-ip/8080
 - To get initial password use:
- `sudo cat/var/lib/jenkins/secrets/initialAdminPassword`
+ ```
+ sudo cat/var/lib/jenkins/secrets/initialAdminPassword
+```
 - Make sure to add Docker and Git Credentials as 
   `docker-cred` and `git-cred` in Jenkins credentials.
 - Choose pipeline job
@@ -177,17 +183,27 @@ After Executing the application locally using docker-compose ,we'll move to Jenk
 Continuous Deployment (CD) is handled by [ArgoCD](https://argo-cd.readthedocs.io/), which automatically syncs and deploys the latest manifests from the Library-Manifests repository to your Kubernetes cluster.
 ### Installation
 - Create a Namespace for Argo CD
-`sudo kubectl create namespace argocd`
+```
+sudo kubectl create namespace argocd
+```
 
 - Install Argo CD
-`sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
+```
+sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
 
 - Make sure all pods are running in Argo CD Namespace
-`sudo kubectl get pods -n argocd`
+```
+sudo kubectl get pods -n argocd
+```
 - Change  the Argo CD server type to Node Port 
-`sudo kubectl patch svc argocd-server -n argocd -p  '{"spec": {"type": "NodePort"}}' `
+```
+sudo kubectl patch svc argocd-server -n argocd -p  '{"spec": {"type": "NodePort"}}' 
+```
 - Get the Node Port using :
-`kubectl get svc argocd-server -n argocd`
+```
+kubectl get svc argocd-server -n argocd
+```
 `80/32xxx` and `443/32xxx` you can access on either of the port numbers. [Make sure to allow the port numbers in security group Inbound Rules]
 - Example port number:  `32454`
 
@@ -196,11 +212,15 @@ Continuous Deployment (CD) is handled by [ArgoCD](https://argo-cd.readthedocs.io
  
 - Initial username is `admin`
 - You can get the password using:
-`kubectl get secret argocd-initial-admin-secret -n  argocd -o jsonpath="{.data.password}" | base64 -d`
+```
+kubectl get secret argocd-initial-admin-secret -n  argocd -o jsonpath="{.data.password}" | base64 -d
+```
 
 **Secrets**
 - Create secrets before setting up applications
-`kubectl  create  secret  generic  library-secrets  --from-literal=DB_USERNAME=dbuser  --from-literal=DB_PASSWORD=Userpassword  --from-literal=DB_URL=jdbc:mysql://db:3306/Library_Manager  --from-literal=MYSQL_ROOT_PASSWORD=Root@123  --from-literal=MYSQL_DATABASE=Library_Manager  --from-literal=MYSQL_USER=dbuser  --from-literal=MYSQL_PASSWORD=Userpassword`
+```
+kubectl  create  secret  generic  library-secrets  --from-literal=DB_USERNAME=dbuser  --from-literal=DB_PASSWORD=Userpassword  --from-literal=DB_URL=jdbc:mysql://db:3306/Library_Manager  --from-literal=MYSQL_ROOT_PASSWORD=Root@123  --from-literal=MYSQL_DATABASE=Library_Manager  --from-literal=MYSQL_USER=dbuser  --from-literal=MYSQL_PASSWORD=Userpassword
+```
 
 - Create 2 applications one for Backend and other for Database.
 - Backend path will be`backend/`
@@ -209,7 +229,9 @@ Continuous Deployment (CD) is handled by [ArgoCD](https://argo-cd.readthedocs.io
 - sync policy is `manual`(i have kept it manual)
 - You should see your pods running in couple of minutes.
 - In instance use :
-`kubectl get pods`
+```
+kubectl get pods
+```
 - you should see two pods running:
 `library` and `db`
 
@@ -227,18 +249,29 @@ Proxy status: `DNS only`
 OR
 - Change the service of backend to `Node port` type.
 - Get the Node port using:
-`sudo kubectl get svc`
+```
+sudo kubectl get svc
+```
 - Note the Node port of the library-app and access the web-app at
  `http//<ec2-public-ip>:nodeport/Homepage.jsp`
  Example:`http//46.78.89.98:32123/Homepage.jsp`
  
 ## Folder Structure
 
-- `backend/` - Spring Boot application
-- `database/` - MySQL Docker file and initialization script
-- `docker-compose.yaml` - Orchestrates backend and database
-- `Jenkinsfile` - Jenkins pipeline for CI/CD
-
+- `Library_manager` 
+├── backend/ # Spring Boot backend application  
+│ ├── src/ # Java source code and resources  
+│ ├── pom.xml # Maven build configuration  
+│ └── Dockerfile # Backend Docker image build file  
+│  
+├── database/ # MySQL database container setup  
+│ ├── library_manager.sql # Initial DB setup script  
+│ └── Dockerfile # MySQL Docker image build file  
+│  
+├── docker-compose.yml # Multi-container orchestration  
+├── Jenkinsfile # Jenkins CI/CD pipeline definition  
+├── .env.example # Environment variables  
+└── README.md # Project documentation
 ---
 
 For any issues, please open an issue on the [GitHub repository](https://github.com/Harshavardhanchary/Library-Manager).
