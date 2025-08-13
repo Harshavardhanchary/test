@@ -262,7 +262,7 @@ sudo kubectl get svc
 ## Folder Structure
 
 - `Library_manager`
-- 
+
 ├── backend/ # Spring Boot backend application  
 │ ├── src/ # Java source code and resources  
 │ ├── pom.xml # Maven build configuration  
