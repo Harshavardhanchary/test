@@ -156,7 +156,7 @@ docker-compose up -d
 docker-compose down
 ```
 
-After Executing the application locally using docker-compose ,we'll move to Jenkins-part
+After verifying the application runs successfully with Docker Compose, proceed with configuring the Jenkins CI/CD pipeline.
   
  ## CI/CD Pipeline (Jenkins + ArgoCD)
  
